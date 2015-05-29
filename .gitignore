@@ -1,0 +1,9 @@
+.idea
+node_modules
+bower
+typings
+.temp
+public/assets
+public/js
+.sass-cache
+npm-debug.log
