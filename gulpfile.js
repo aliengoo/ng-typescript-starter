@@ -147,8 +147,24 @@ gulp.task("bower", ["bower:js", "bower:css", "bower:assets"], function (done) {
 
 gulp.task('webserver', function () {
   gulp.src('public').pipe(lp.webserver({
-    fallback: 'index.html'
+    fallback: 'index.html',
+    port: 3000
   }));
+});
+
+gulp.task('nodemonserver', function () {
+  lp.nodemon({
+    script: './server/server.js',
+    ext: 'js',
+    watch : "./server",
+    nodeArgs: ["--debug", "--harmony"],
+    execMap: {
+      "js": "node"
+    },
+    env: {
+      'NODE_ENV': 'development'
+    }
+  });
 });
 
 
@@ -159,6 +175,14 @@ gulp.task('default', ['styles', 'bower', 'build'], function(){
 
   gulp.watch('app/**/*', ['build']);
   gulp.watch('styles/**/*', ['styles']);
+
+  if (args.webserver){
+    gulp.start('webserver');
+  }
+
+  if (args.nodemon){
+    gulp.start('nodemonserver');
+  }
 });
 
 function clean(path, done) {
