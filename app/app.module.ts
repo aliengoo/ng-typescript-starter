@@ -1,4 +1,5 @@
 /// <reference path="../typings/angularjs/angular.d.ts"/>
+/// <reference path="./home/home.module.ts"/>
 
 module app {
 
@@ -8,7 +9,8 @@ module app {
     'ngResource',
     'ngCookies',
     'ngAnimate',
-    'app.templates'])
+    'app.templates',
+    'app.home'])
   .controller('AppController', AppController)
   .config(AppConfig);
 }
