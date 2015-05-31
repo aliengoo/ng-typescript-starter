@@ -8,7 +8,7 @@ module app {
     message: string;
 
     constructor(){
-      this.message = "Hello, TypeScript!";
+      this.message = "Hello, TypeScript";
     }
   }
 }

@@ -1,24 +1,6 @@
-div(layout="column")
-  section(layout="row" flex)
-    md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id="left" md-is-locked-open="$mdMedia('gt-md')")
-      md-toolbar.md-theme-indigo
-        h1.md-toolbar-tools Navigation
-        md-button Flat Button
-        md-button(href="http://google.com") Flat link
-        <md-button class="md-raised">
-        Raised Button
-        </md-button>
-        <md-button ng-disabled="true">
-        Disabled Button
-        </md-button>
-        <md-button class="md-fab" aria-label="FAB">
-        <md-icon md-svg-src="your/icon.svg"></md-icon>
-        </md-button>
-        <md-button class="md-fab md-mini" aria-label="Mini FAB">
-        <md-icon md-svg-src="your/icon.svg"></md-icon>
-        </md-button>
-        <md-button class="md-icon-button" aria-label="Custom Icon Button">
-        <md-icon md-svg-icon="path/to/your.svg"></md-icon>
-        </md-button>
-    div(ui-view)
+.row
+	.small-12
+		h1.text-center {{vm.message}}
 
+	.small-8.small-offset-2
+		button.button I am a button!
