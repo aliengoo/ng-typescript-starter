@@ -10,7 +10,7 @@ var serve = serveStatic('public');
 
 app.use(serve);
 
-app.get('/hello-world', function(req:express.Request , res:express.Response){
+app.get('/hello-world', (req:express.Request , res:express.Response): void => {
   res.json({
     message: 'Hello, World!'
   });
