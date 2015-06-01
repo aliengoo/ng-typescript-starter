@@ -58,10 +58,10 @@ gulp.task('build', ['js:build', 'templates:build'], function () {
     .pipe(lp.livereload());
 });
 
-gulp.task('ts:build', ['clean:appjs'], function () {
+gulp.task('ts:client:build', ['clean:appjs'], function () {
 
   // builds the typescript files and plonks them into temp
-  var tsResult = gulp.src('app/**/*.ts')
+  var tsResult = gulp.src('./app/**/*.ts')
     .pipe(lp.typescript({
       noImplicitAny: true,
       out: 'app.js'
@@ -70,7 +70,19 @@ gulp.task('ts:build', ['clean:appjs'], function () {
   return tsResult.js.pipe(gulp.dest(config.temp));
 });
 
-gulp.task('js:build', ['ts:build'], function () {
+gulp.task('ts:server:build', function () {
+
+  // builds the typescript files and plonks them into temp
+  var tsResult = gulp.src('./server/**/*.ts')
+    .pipe(lp.typescript({
+      noImplicitAny: true,
+      module:'commonjs'
+    }));
+
+  return tsResult.js.pipe(gulp.dest('./server'));
+});
+
+gulp.task('js:build', ['ts:client:build'], function () {
   return gulp.src(path.join(config.temp, 'app.js'))
     .pipe(lp.ngAnnotate())
     .pipe(gulp.dest(config.temp));
@@ -152,11 +164,14 @@ gulp.task('webserver', function () {
   }));
 });
 
-gulp.task('nodemonserver', function () {
+gulp.task('watch:server', function() {
+  gulp.watch('./server/**/*.ts', ['ts:server:build']);
+});
+
+gulp.task('nodemonserver', ['ts:server:build', 'watch:server'], function () {
   lp.nodemon({
     script: './server/server.js',
     ext: 'js',
-    watch : "./server",
     nodeArgs: ["--debug", "--harmony"],
     execMap: {
       "js": "node"
@@ -173,8 +188,8 @@ gulp.task('default', ['styles', 'bower', 'build'], function(){
     start: true
   });
 
-  gulp.watch('app/**/*', ['build']);
-  gulp.watch('styles/**/*', ['styles']);
+  lp.watch('app/**/*', ['build']);
+  lp.watch('styles/**/*', ['styles']);
 
   if (args.webserver){
     gulp.start('webserver');
