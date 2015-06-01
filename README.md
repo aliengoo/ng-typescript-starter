@@ -35,6 +35,8 @@ Put your AngularJS/TypeScript code in here.
 
 If you need to use a nodejs server, then stick your code in here.  Remember to run `gulp --nodemon` to start the server.
 
+Write your code in TypeScript...
+
 ### ./styles
 	
 *.scss* created here will end up in _./assets/styles.css_.
