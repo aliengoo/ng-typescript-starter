@@ -1,14 +1,14 @@
 module app {
 
   interface IAppModel {
-    message: string;
+    appTitle: string;
   }
 
   export class AppController implements IAppModel{
-    message: string;
+    appTitle: string;
 
     constructor(){
-      this.message = "Hello, TypeScript";
+      this.appTitle = "ng-typescript-starter";
     }
   }
 }

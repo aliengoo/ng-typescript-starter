@@ -171,6 +171,7 @@ gulp.task('watch:server', function() {
 gulp.task('nodemonserver', ['ts:server:build', 'watch:server'], function () {
   lp.nodemon({
     script: './server/server.js',
+    ignore: ['public/**', '.temp/**', 'app/**'],
     ext: 'js',
     nodeArgs: ["--debug", "--harmony"],
     execMap: {
@@ -188,8 +189,8 @@ gulp.task('default', ['styles', 'bower', 'build'], function(){
     start: true
   });
 
-  lp.watch('app/**/*', ['build']);
-  lp.watch('styles/**/*', ['styles']);
+  gulp.watch('app/**/*', ['build']);
+  gulp.watch('styles/**/*', ['styles']);
 
   if (args.webserver){
     gulp.start('webserver');

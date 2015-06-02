@@ -6,11 +6,14 @@ module app.home {
     static $inject = ['$stateProvider'];
 
     constructor($stateProvider:ng.ui.IStateProvider) {
-      $stateProvider.state('home', {
+      
+      var homeState:ng.ui.IState = {
         url: '/home',
         controller: 'HomeController as vm',
         templateUrl: 'home/home.html'
-      });
+      };
+      
+      $stateProvider.state('app.home', homeState);
     }
   }
 }

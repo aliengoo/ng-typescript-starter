@@ -10,14 +10,14 @@ module app {
       private $urlRouterProvider: angular.ui.IUrlRouterProvider){
 
       var appState: angular.ui.IState = {
-        url: '/',
+        abstract: true,
         templateUrl: 'app.html',
         controller: 'AppController as vm'
       };
 
       this.$stateProvider.state('app', appState);
 
-      this.$urlRouterProvider.otherwise('/');
+      this.$urlRouterProvider.otherwise('/home');
     }
   }
 }
